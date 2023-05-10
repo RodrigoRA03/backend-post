@@ -19,10 +19,15 @@ class PostService
 
     public function storePost(array $args)
     {
-        // dd($args);s
         $post = Post::query()->create(array_merge($args, ['autor' => 2]));
         // auth()->name
 
+        return $post;
+    }
+
+    public function showPost($id)
+    {
+        $post = Post::query()->with('comments')->get()->find($id);
         return $post;
     }
 }

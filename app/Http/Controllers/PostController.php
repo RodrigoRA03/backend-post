@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Post\PostRequest;
+
 use App\Models\Blog\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -39,20 +39,14 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // $request = new PostRequest(...array_values($request->validated()));
         $response = $this->service->storePost($request->validated());
-        return response()->json($request, 200);
+        return response()->json($response, 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Blog\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
+    public function getPostById($request)
     {
-        //
+        $response = $this->service->showPost($request);
+        return response()->json($response);
     }
 
     /**

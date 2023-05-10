@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('posts')->group(function () {
 
     Route::get('/', [PostController::class, 'index']);
+    Route::get('/get-post-by-id/{id}', [PostController::class, 'getPostById']);
     Route::post('/', [PostController::class, 'store']);
 });
 
