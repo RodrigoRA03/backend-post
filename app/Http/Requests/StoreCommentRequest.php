@@ -25,8 +25,7 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'post_id' => ['required'],
-            'autor' => ['required'],
-            'contenido' => ['required', 'date'],
+            'contenido' => ['required'],
         ];
     }
 }

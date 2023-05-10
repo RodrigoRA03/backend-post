@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Services\CommentService;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -11,10 +12,12 @@ class CommentController extends Controller
 
     /** @var PostServices */
     private $service;
+    private $postService;
 
-    public function __construct(CommentService $service)
+    public function __construct(CommentService $service, PostService $postService)
     {
         $this->service = $service;
+        $this->postService = $postService;
     }
 
     /**
@@ -37,8 +40,9 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        $request = $this->service->storeComment($request->validated());
-        return response()->json($request, 200);
+        $response = $this->service->storeComment($request->validated());
+        $postResponse = $this->postService->showPost($response->post_id);
+        return response()->json($postResponse, 200);
     }
 
     /**

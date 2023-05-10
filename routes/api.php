@@ -21,14 +21,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('posts')->group(function () {
+Route::prefix('posts')->middleware('auth:sanctum')->group(function () {
 
     Route::get('/', [PostController::class, 'index']);
     Route::get('/get-post-by-id/{id}', [PostController::class, 'getPostById']);
     Route::post('/', [PostController::class, 'store']);
 });
 
-Route::prefix('comments')->group(function () {
+Route::prefix('comments')->middleware('auth:sanctum')->group(function () {
 
     Route::get('/', [CommentController::class, 'index']);
     Route::post('/', [CommentController::class, 'store']);

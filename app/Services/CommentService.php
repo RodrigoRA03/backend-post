@@ -18,11 +18,14 @@ class CommentService
 
     public function storeComment(array $args)
     {
+        $user = auth()->user(); // obtiene el objeto del usuario autenticado
+        $nombre = $user->name;
         $comment = Comment::query()->create([
-            'titulo' => $args['titulo'],
-            'cuerpo' => $args['cuerpo'],
-            'fecha_publicacion' => $args['fecha_publicacion']
+            'contenido' => $args['contenido'],
+            'post_id' => $args['post_id'],
+            'autor' => $nombre,
         ]);
+
 
         return $comment;
     }

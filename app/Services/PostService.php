@@ -19,9 +19,9 @@ class PostService
 
     public function storePost(array $args)
     {
-        $post = Post::query()->create(array_merge($args, ['autor' => 2]));
-        // auth()->name
-
+        $user = auth()->user(); // obtiene el objeto del usuario autenticado
+        $nombre = $user->name;
+        $post = Post::query()->create(array_merge($args, ['autor' => $nombre]));
         return $post;
     }
 
